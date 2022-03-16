@@ -8,6 +8,7 @@ cursor.execute("CREATE TABLE IF NOT EXISTS users(name TEXT, spending FLOAT)")
 choice = None
 
 while choice != "6":
+    print()
     print("1) Display Users")
     print("2) Add User")
     print("3) Update Spending")
@@ -16,6 +17,7 @@ while choice != "6":
     print("6) Quit")
 
     choice = input("> ")
+    print()
 
     match choice:
         case "1":
