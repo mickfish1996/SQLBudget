@@ -1,9 +1,10 @@
 import sqlite3
+from datetime import datetime
 
 connection = sqlite3.connect('budget.db')
 cursor = connection.cursor()
 
-cursor.execute("CREATE TABLE IF NOT EXISTS users(name TEXT, spending FLOAT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS users(name TEXT, spending FLOAT, date DATETIME)")
 
 choice = None
 
@@ -24,19 +25,20 @@ while choice != "6":
             cursor.execute("SELECT * FROM users ORDER BY spending")
 
             
-            print("{:>10}  {:>10}" .format("Name", "Spending"))
+            print("{:>10}  {:>10}  {:>10}".format("Name", "Spending", "DateTime"))
 
         
             for record in cursor.fetchall():
-                print("{:>10}  {:>10}".format(record[0], record[1]))
+                print("{:>10}  {:>10}  {:>10}".format(record[0], record[1], record[2]))
 
         case "2":
             try: 
                 name = input("Name: ")
                 spending = 0.0
-                values = (name, spending)
+                date = datetime.now()
+                values = (name, spending,date)
 
-                cursor.execute("INSERT INTO users VALUES (?,?)", values)
+                cursor.execute("INSERT INTO users VALUES (?,?,?)", values)
                 connection.commit()
 
             except ValueError:
