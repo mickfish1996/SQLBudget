@@ -4,7 +4,8 @@ from datetime import datetime
 connection = sqlite3.connect('budget.db')
 cursor = connection.cursor()
 
-cursor.execute("CREATE TABLE IF NOT EXISTS users(name TEXT, spending FLOAT, date DATETIME)")
+cursor.execute("CREATE TABLE IF NOT EXISTS users(name TEXT, id INTEGER)",
+               "CREATE TABLE IF NOT EXISTS transactions(user_id INTEGER, amoutn FLOAT, date DATE TIME)")
 
 choice = None
 
