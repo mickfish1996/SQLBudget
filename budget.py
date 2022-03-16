@@ -4,8 +4,9 @@ from datetime import datetime
 connection = sqlite3.connect('budget.db')
 cursor = connection.cursor()
 
-cursor.execute("CREATE TABLE IF NOT EXISTS users(name TEXT, id INTEGER)",
-               "CREATE TABLE IF NOT EXISTS transactions(user_id INTEGER, amoutn FLOAT, date DATE TIME)")
+cursor.execute("CREATE TABLE IF NOT EXISTS users(name TEXT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS transactions(user_id INTEGER, amount FLOAT, date DATETIME)")
+
 
 choice = None
 
@@ -35,11 +36,9 @@ while choice != "6":
         case "2":
             try: 
                 name = input("Name: ")
-                spending = 0.0
-                date = datetime.now()
-                values = (name, spending,date)
+                values = (name)
 
-                cursor.execute("INSERT INTO users VALUES (?,?,?)", values)
+                cursor.execute("INSERT INTO users VALUES (?)", values)
                 connection.commit()
 
             except ValueError:
